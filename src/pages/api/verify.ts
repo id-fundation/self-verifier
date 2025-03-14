@@ -25,9 +25,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       // Verify the proof
       const result = await selfBackendVerifier.verify(proof, publicSignals);
-      console.log(result);
       
       if (result.isValid) {
+        const name= result.credentialSubject.name 
+        const response = await fetch('https://token.id.fundation/mvp/self', { 
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ id:userId, firstName:name,  dob: result.credentialSubject.date_of_birth, ifac:result.credentialSubject.passport_no_ofac })
+        });
+        console.log(response, result);
+    
         // Return successful verification response
         return res.status(200).json({
           status: 'success',

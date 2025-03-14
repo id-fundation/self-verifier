@@ -4,6 +4,7 @@ import { getUserIdentifier, SelfBackendVerifier, countryCodes } from '@selfxyz/c
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     try {
+      console.log("STARTING POST")
       const { proof, publicSignals } = req.body;
 
       if (!proof || !publicSignals) {
@@ -61,6 +62,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       });
     }
   } else {
+    console.log("ERR")
     return res.status(405).json({ message: 'Method not allowed' });
   }
 }

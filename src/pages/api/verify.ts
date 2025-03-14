@@ -17,19 +17,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       // Initialize and configure the verifier
       const selfBackendVerifier = new SelfBackendVerifier(
         'https://forno.celo.org',
-        'my-application-scope'
+        'peopleapp'
       );
       
-      // Configure verification options
-      selfBackendVerifier.setMinimumAge(18);
-      selfBackendVerifier.excludeCountries(
-        countryCodes.IRN,   // Iran
-        countryCodes.PRK    // North Korea
-      );
+      
       selfBackendVerifier.enableNameAndDobOfacCheck();
 
       // Verify the proof
       const result = await selfBackendVerifier.verify(proof, publicSignals);
+      console.log(result);
       
       if (result.isValid) {
         // Return successful verification response

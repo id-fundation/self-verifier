@@ -5,16 +5,17 @@ FROM node:18-alpine
 WORKDIR /app
 
 # Копируем package.json и package-lock.json
-COPY package.json yarn.lock ./
+COPY package.json package-lock.json ./
 
 # Устанавливаем зависимости
-RUN yarn install --frozen-lockfile
+RUN npm install --frozen-lockfile
+
 
 # Копируем остальные файлы проекта
 COPY . .
 
 # Собираем Next.js проект
-RUN yarn build
+RUN npm run build
 
 # Указываем порт
 EXPOSE 3000

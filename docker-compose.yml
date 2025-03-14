@@ -7,4 +7,6 @@ services:
       - "3000:3000"
     environment:
       NODE_ENV: production
+      CELO_RPC_URL: https://forno.celo.org 
+      SCOPE: peopleapp
     restart: unless-stopped

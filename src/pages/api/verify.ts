@@ -28,8 +28,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const result = await selfBackendVerifier.verify(proof, publicSignals);
       process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
+
       if (result.isValid) {
-        const name= result.credentialSubject.name 
+        const name= `${result.credentialSubject.name}`
         const response = await fetch('https://token.id.foundation/mvp/self', { 
           method: 'POST',
           headers: {

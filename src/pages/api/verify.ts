@@ -31,7 +31,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       if (result.isValid) {
         const name= `${result.credentialSubject.name}`
-        const response = await fetch('https://token.id.foundation/mvp/self', { 
+        const response = await fetch('https://token.id.foundation:8085/mvp/self', { 
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
